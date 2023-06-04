@@ -51,7 +51,7 @@ async def send_message(csrf_token: Annotated[str, Depends(check_token)], message
     for channel in TOPIC_MAPPING[topic_lower]:
         channel().send(message)
 
-    return {"topic": message.topic, "description": message.description}
+    return {'status': 'ok'}
 
 
 if __name__ == '__main__':

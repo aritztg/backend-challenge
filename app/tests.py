@@ -49,6 +49,7 @@ class BackendAppTests(TestCase):
     def test_invalid_topic(self):
         response = client.post(INPUT_PATH, params={'csrf_token': VALID_TOKEN}, json=VALID_MESSAGE)
         assert response.status_code == 200
+        assert response.json() == {'status': 'ok'}
 
     def test_malformed_input(self):
         # Wrong schema.
