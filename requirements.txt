@@ -1,0 +1,5 @@
+fastapi==0.96.0  # For server mode.
+python-dotenv==1.0.0  # Used for autoload variables from .env file.
+slack-sdk==3.21.3  # Used to connecto to Slack.
+uvicorn==0.22.0  # Web server implementation for Python apps.
+zenlog==1.1  # Handy logger helper (quite old and unmaintained, actually).
