@@ -4,7 +4,7 @@ from typing import Annotated
 import uvicorn
 from custom_types import Message
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Response
 from settings import TOPIC_MAPPING
 
 # Load env variables from `.env`.
@@ -17,7 +17,7 @@ INPUT_PATH = '/input/'
 app = FastAPI(title='Landbot messages API', description='Message catcher and proxy microservice.')
 
 
-async def check_token(csrf_token):
+async def check_token(csrf_token: str) -> bool:
     """Utility function to check CSRF validity against an environment predefined constant."""
     if not csrf_token == getenv('VALID_CSRF_TOKEN'):
         raise HTTPException(status_code=403, detail='Unauthorised. Invalid CSRF Token.')
@@ -26,7 +26,8 @@ async def check_token(csrf_token):
 
 
 @app.post(INPUT_PATH)
-async def send_message(csrf_token: Annotated[str, Depends(check_token)], message: Message):  # pylint: disable=W0613
+async def send_message(csrf_token: Annotated[str, Depends(check_token)],  # pylint: disable=W0613
+                       message: Message) -> Response:
     """Main entry point of the backend app mounted as a POST method in /{INPUTPATH} entrypoint.
 
     It will check first the mandatory CSRF token, and the rest of the input message data (a dict with two keys,
