@@ -1,7 +1,7 @@
 run:
 	python app/backend.py
 
-test:
+tests:
 	python -m unittest discover app
 
 lint:
