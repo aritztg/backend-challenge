@@ -7,7 +7,7 @@ from unittest import TestCase
 from dotenv import load_dotenv
 from fastapi.testclient import TestClient
 
-from app.backend import INPUT_PATH, app
+from app.backend import INPUT_PATH, app  # pylint: disable=E0401
 
 # Load env variables from `.env`.
 load_dotenv()
