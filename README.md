@@ -27,6 +27,9 @@ Pricing  | Email
 - Be a dockerized app.
 
 
+---
+![ci workflow](https://github.com/aritztg/backend-test/actions/workflows/quality_check.yml/badge.svg)
+
 ## Approach
 
 > _The only line that never fails, is the one we never write._
@@ -56,7 +59,7 @@ This guide assumes that the reader has a minimal experience with python and its 
 
 ## How to run
 
-### Locally
+### Locally
 
 As a regular python app (in the right environment):
 ```bash
