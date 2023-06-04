@@ -40,10 +40,10 @@ class Email(Channel):
     """
 
     def __init__(self):
-        self.imap_server = getenv('IMAP_SERVER')
-        self.imap_port = getenv('IMAP_PORT')
-        self.imap_tls = getenv('IMAP_TLS')
-        # self.email_server_handler = SomeFakeLib(imap_server, imap_port, imap_tls)
+        self.smtp_server = getenv('SMTP_SERVER')
+        self.smtp_port = getenv('SMTP_PORT')
+        self.smtp_tls = getenv('SMTP_TLS')
+        # self.email_server_handler = SomeFakeLib(smtp_server, smtp_port, smtp_tls)
 
     def send(self, message):
         # self.email_server_handler.send(message)
