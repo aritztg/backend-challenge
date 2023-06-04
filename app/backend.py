@@ -18,6 +18,7 @@ app = FastAPI(title='Landbot messages API', description='Message catcher and pro
 
 
 async def check_token(csrf_token):
+    """Utility function to check CSRF validity against an environment predefined constant."""
     if not csrf_token == getenv('VALID_CSRF_TOKEN'):
         raise HTTPException(status_code=403, detail='Unauthorised. Invalid CSRF Token.')
 
@@ -26,6 +27,14 @@ async def check_token(csrf_token):
 
 @app.post(INPUT_PATH)
 async def send_message(csrf_token: Annotated[str, Depends(check_token)], message: Message):  # pylint: disable=W0613
+    """Main entry point of the backend app mounted as a POST method in /{INPUTPATH} entrypoint.
+
+    It will check first the mandatory CSRF token, and the rest of the input message data (a dict with two keys,
+    topic and description, which must be defined as well).
+    Finally, it will send the task/user-request to different channels depending on the topic passed. Note that a
+    topic could be mapped to multiple channels, so they would be executed sequentially (this could be improved to make
+    those async).
+    """
 
     # Clean topic.
     topic_lower = message.topic.lower()

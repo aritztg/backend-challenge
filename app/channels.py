@@ -8,12 +8,21 @@ UNDEFINED_GENERIC_ERROR = 'Undefined method in the inherited class'
 
 
 class Channel(ABC):
+    """Channel abstract class to define basic structure.
+
+    To be followed by its implementations. Ensures `send()` mehod to be implemented.
+    """
 
     def send(self, message):
+        """This method will be called to pass `message` to endpoints. It must be implemented by inherited classes."""
         raise NotImplementedError(f'{UNDEFINED_GENERIC_ERROR} {self.__class__.__name__}')
 
 
 class Slack(Channel):
+    """Slack channel implementation
+
+    Should initialise a Slack client handler and be ready to send incoming messages to some predefined Slack channel.
+    """
 
     def __init__(self):
         self.channel = getenv('SLACK_CHANNEL')
@@ -25,6 +34,10 @@ class Slack(Channel):
 
 
 class Email(Channel):
+    """Email (SMTP) channel implementation
+
+    Should be able to connect to some SMTP server and send a message via email.
+    """
 
     def __init__(self):
         self.imap_server = getenv('IMAP_SERVER')
@@ -38,6 +51,10 @@ class Email(Channel):
 
 
 class PubSub(Channel):
+    """PubSub channel implementation
+
+    Should be able to connect to some pubsub queue and push a message into it.
+    """
 
     def __init__(self):
         self.project_id = getenv('PUBSUB_PROJECT_ID')
