@@ -7,6 +7,7 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # Then the app.
 COPY ./app /code/app
+COPY ./.env /code/.env
 ENV PYTHONPATH=/code/app
 
 # Entrypoint.
